@@ -1,32 +1,40 @@
-// src/hooks/useWeather.js
 import { useEffect, useState } from "react";
 
-export default function useWeather(city = "Jaipur") {
+export default function useWeather(city) {
   const [weather, setWeather] = useState({
-    city,
+    city: "",
     temp: null,
-    condition: "Loading...",
+    condition: "",
     humidity: "--",
     wind: "--",
-    loading: true,
+    loading: false,
     error: null,
   });
 
   useEffect(() => {
-    const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+    if (!city) return;
 
+    const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
     async function fetchWeather() {
       try {
+        setWeather((prev) => ({
+          ...prev,
+          loading: true,
+          error: null,
+        }));
+
         const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+            city
+          )}&appid=${API_KEY}&units=metric`
         );
 
-        if (!response.ok) {
-          throw new Error("Unable to fetch weather data");
-        }
-
         const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || "Unable to fetch weather data");
+        }
 
         setWeather({
           city: data.name,
@@ -41,7 +49,7 @@ export default function useWeather(city = "Jaipur") {
         setWeather({
           city,
           temp: null,
-          condition: "Weather unavailable",
+          condition: "",
           humidity: "--",
           wind: "--",
           loading: false,

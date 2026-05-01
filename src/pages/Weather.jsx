@@ -1,20 +1,21 @@
-// src/pages/Weather.jsx
 import { useState } from "react";
 import useWeather from "../hooks/useWeather";
 
 export default function Weather() {
   const [inputCity, setInputCity] = useState("");
-  const [selectedCity, setSelectedCity] = useState("Delhi");
+  const [selectedCity, setSelectedCity] = useState("");
 
   const weather = useWeather(selectedCity);
 
   const handleSearch = (e) => {
     e.preventDefault();
 
-    if (inputCity.trim() === "") return;
+    if (inputCity.trim() === "") {
+      alert("Please enter a city name");
+      return;
+    }
 
     setSelectedCity(inputCity.trim());
-    setInputCity("");
   };
 
   return (
@@ -32,7 +33,9 @@ export default function Weather() {
         <button type="submit">Search</button>
       </form>
 
-      {weather.loading ? (
+      {!selectedCity ? (
+        <p>Enter a city name to check live weather.</p>
+      ) : weather.loading ? (
         <p>Loading weather...</p>
       ) : weather.error ? (
         <div className="weather-error">
@@ -50,4 +53,3 @@ export default function Weather() {
     </div>
   );
 }
-
