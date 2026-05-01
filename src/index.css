@@ -1,0 +1,22 @@
+/* src/index.css */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, Arial, sans-serif;
+  background: #050816;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
