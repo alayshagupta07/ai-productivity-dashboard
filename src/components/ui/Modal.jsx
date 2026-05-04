@@ -1,4 +1,4 @@
-// src/components/ui/Modal.jsx
+// src/components/ui/Modal.jsx reusable popup component work acc to isopen
 import Button from "./Button";
 
 export default function Modal({ isOpen, onClose, title, children }) {

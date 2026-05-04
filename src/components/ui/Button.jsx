@@ -1,10 +1,10 @@
 // src/components/ui/Button.jsx
-export default function Button({
+export default function Button({   //props destructuring extracting them directly
   children,
   onClick,
   type = "button",
   variant = "primary",
-  className = "",
+  className = "", 
 }) {
   return (
     <button

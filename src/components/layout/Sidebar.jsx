@@ -7,6 +7,7 @@ const items = [
   { key: "notes", icon: "N", label: "Notes" },
   { key: "calendar", icon: "C", label: "Calendar" },
   { key: "weather", icon: "W", label: "Weather" },
+  { key: "aiAgent", icon: "AI", label: "AI Agent" },
 ];
 
 export default function Sidebar({ activePage, setPage }) {

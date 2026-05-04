@@ -1,14 +1,34 @@
-:root {
+/* ================= THEME VARIABLES ================= */
+
+/* DARK THEME (default) */
+body.dark {
   --bg-main: #050816;
   --bg-panel: rgba(15, 23, 42, 0.86);
   --border: rgba(34, 211, 238, 0.22);
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
+
   --cyan: #22d3ee;
   --blue: #3b82f6;
   --purple: #8b5cf6;
   --pink: #ec4899;
 }
+
+/* LIGHT THEME */
+body.light {
+  --bg-main: #f8fafc;
+  --bg-panel: rgba(255, 255, 255, 0.9);
+  --border: rgba(0, 0, 0, 0.08);
+  --text-main: #0f172a;
+  --text-muted: #475569;
+
+  --cyan: #0891b2;
+  --blue: #2563eb;
+  --purple: #7c3aed;
+  --pink: #db2777;
+}
+
+/* ================= GLOBAL ================= */
 
 * {
   box-sizing: border-box;
@@ -16,10 +36,13 @@
 
 body {
   margin: 0;
-  background: #050816;
+  background: var(--bg-main);
   color: var(--text-main);
   font-family: Inter, Arial, sans-serif;
+  transition: 0.3s ease;
 }
+
+/* ================= LAYOUT ================= */
 
 .app-layout {
   display: flex;
@@ -38,7 +61,11 @@ body {
   height: 100vh;
   padding: 28px 22px;
   background: rgba(2, 6, 23, 0.92);
-  border-right: 1px solid rgba(34, 211, 238, 0.2);
+  border-right: 1px solid var(--border);
+}
+
+body.light .sidebar {
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .sidebar h2 {
@@ -61,7 +88,7 @@ body {
   border: 0;
   border-radius: 14px;
   background: transparent;
-  color: #cbd5e1;
+  color: var(--text-muted);
   font-size: 16px;
   cursor: pointer;
 }
@@ -69,8 +96,10 @@ body {
 .sidebar button:hover,
 .sidebar button.active {
   background: rgba(34, 211, 238, 0.14);
-  color: white;
+  color: var(--text-main);
 }
+
+/* ================= ICONS ================= */
 
 .nav-icon,
 .dash-icon {
@@ -85,12 +114,16 @@ body {
   box-shadow: 0 0 20px rgba(34, 211, 238, 0.28);
 }
 
+/* ================= MAIN ================= */
+
 .main-area {
   margin-left: 270px;
   width: calc(100% - 270px);
   min-height: 100vh;
   padding: 28px;
 }
+
+/* ================= TOPBAR ================= */
 
 .topbar {
   display: flex;
@@ -114,10 +147,35 @@ body {
 
 .topbar h1 {
   margin: 8px 0 0;
-  color: white;
+  color: var(--text-main);
   font-size: 34px;
 }
 
+/* RIGHT SIDE (NEW) */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* THEME BUTTON */
+.theme-toggle {
+  border: none;
+  background: var(--bg-panel);
+  color: var(--text-main);
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  border: 1px solid var(--border);
+  transition: 0.2s;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* PROFILE */
 .profile {
   width: 56px;
   height: 56px;
@@ -128,6 +186,8 @@ body {
   color: white;
   font-weight: 900;
 }
+
+/* ================= CONTENT ================= */
 
 .stats-grid {
   display: grid;
@@ -147,7 +207,7 @@ body {
 
 .card h3 {
   margin: 18px 0 6px;
-  color: white;
+  color: var(--text-main);
   font-size: 34px;
 }
 
@@ -159,8 +219,10 @@ body {
 
 .panel h2 {
   margin-top: 0;
-  color: white;
+  color: var(--text-main);
 }
+
+/* ================= TASK ================= */
 
 .task {
   display: flex;
@@ -171,12 +233,16 @@ body {
   margin-bottom: 14px;
   border-radius: 16px;
   background: rgba(2, 6, 23, 0.55);
-  border: 1px solid rgba(34, 211, 238, 0.18);
+  border: 1px solid var(--border);
+}
+
+body.light .task {
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .task h3 {
   margin: 0;
-  color: white;
+  color: var(--text-main);
 }
 
 .task button,
@@ -190,6 +256,8 @@ body {
   cursor: pointer;
 }
 
+/* ================= FORM ================= */
+
 .form {
   display: grid;
   gap: 14px;
@@ -202,10 +270,12 @@ body {
   width: 100%;
   padding: 14px;
   border-radius: 14px;
-  border: 1px solid rgba(34, 211, 238, 0.22);
-  background: rgba(2, 6, 23, 0.64);
-  color: white;
+  border: 1px solid var(--border);
+  background: var(--bg-panel);
+  color: var(--text-main);
 }
+
+/* ================= NOTES ================= */
 
 .notes-grid {
   display: grid;
@@ -216,18 +286,22 @@ body {
 .note {
   padding: 18px;
   border-radius: 18px;
-  background: rgba(2, 6, 23, 0.56);
-  border: 1px solid rgba(34, 211, 238, 0.18);
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
 }
 
 .note h3 {
   color: var(--cyan);
 }
 
+/* ================= WEATHER ================= */
+
 .weather h1 {
   font-size: 70px;
   color: var(--cyan);
 }
+
+/* ================= RESPONSIVE ================= */
 
 @media (max-width: 900px) {
   .sidebar {
@@ -249,4 +323,75 @@ body {
   .notes-grid {
     grid-template-columns: 1fr;
   }
+}
+
+.ai-agent {
+  max-width: 900px;
+}
+
+.chat-box {
+  height: 420px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  margin: 20px 0;
+  background: #f4f7fb;
+  border-radius: 14px;
+  border: 1px solid #dbe3ef;
+}
+
+.chat-message {
+  max-width: 75%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  line-height: 1.5;
+}
+
+.chat-message p {
+  margin: 0;
+}
+
+.chat-message.user {
+  align-self: flex-end;
+  background: #2563eb;
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-message.assistant {
+  align-self: flex-start;
+  background: white;
+  color: #1f2937;
+  border: 1px solid #e5e7eb;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-form {
+  display: flex;
+  gap: 12px;
+}
+
+.chat-form input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.chat-form button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chat-form button:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
 }

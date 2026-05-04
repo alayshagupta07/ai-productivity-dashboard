@@ -6,7 +6,7 @@ export default function Calendar() {
 
   return (
     <div className="panel">
-      <h2>Calendar</h2>
+      <h2>Daily Planning</h2>
       {events.map(event => (
         <div className="task" key={event.id}>
           <h3>{event.title}</h3>
